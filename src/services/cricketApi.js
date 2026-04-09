@@ -131,6 +131,10 @@ const transformScorecard = (raw) => {
     return MOCK_SCORECARD;
   }
 
+  const batting = raw.batting || raw.scorecard?.[0]?.batting || [];
+  const bowling = raw.bowling || raw.scorecard?.[0]?.bowling || [];
+  const { onStrike, nonStriker, currentBowler } = inferLivePlayers(batting, bowling, raw);
+
   return {
     id: raw.id,
     name: raw.name,
@@ -144,15 +148,45 @@ const transformScorecard = (raw) => {
     score: raw.score,
     scorecard: raw.scorecard,
     currentInnings: raw.currentInnings || inferCurrentInnings(raw),
-    batting: raw.batting || raw.scorecard?.[0]?.batting || [],
-    bowling: raw.bowling || raw.scorecard?.[0]?.bowling || [],
-    onStrike: raw.onStrike || null,
-    nonStriker: raw.nonStriker || null,
-    currentBowler: raw.currentBowler || null,
+    batting,
+    bowling,
+    onStrike: raw.onStrike || onStrike,
+    nonStriker: raw.nonStriker || nonStriker,
+    currentBowler: raw.currentBowler || currentBowler,
     previousInnings: raw.previousInnings || null,
     ballByBall: raw.ballByBall || [],
     ...raw,
   };
+};
+
+const inferLivePlayers = (batting, bowling, raw) => {
+  let onStrike = null;
+  let nonStriker = null;
+  let currentBowler = null;
+
+  // 1. Find batters not out
+  const activeBatters = (batting || []).filter(p => !p.dismissed && (p.howOut === 'batting*' || p.howOut === 'batting' || !p.howOut));
+  
+  // Try to find the one with '*' in name or howOut
+  activeBatters.forEach(p => {
+    if (p.name?.includes('*') || p.howOut?.includes('*')) {
+      onStrike = p;
+    } else {
+      nonStriker = p;
+    }
+  });
+
+  // Fallback if no '*' was found
+  if (!onStrike && activeBatters.length > 0) {
+    onStrike = activeBatters[0];
+    nonStriker = activeBatters[1] || null;
+  }
+
+  // 2. Find bowler
+  // Some APIs put the current bowler at the end of the bowl array or with a '*'
+  currentBowler = bowling?.find(p => p.name?.includes('*')) || bowling?.[bowling.length - 1] || null;
+
+  return { onStrike, nonStriker, currentBowler };
 };
 
 const normalizeMatch = (match) => {
@@ -178,10 +212,52 @@ const transformPlayerInfo = (raw, fallbackPlayer) => {
     battingStyle: raw.battingStyle,
     bowlingStyle: raw.bowlingStyle,
     team: fallbackPlayer?.team || '',
-    stats: raw.stats || fallbackPlayer?.stats || {},
+    stats: parseCricAPIStats(raw.stats) || fallbackPlayer?.stats || {},
     currentForm: fallbackPlayer?.currentForm || [],
     impactScore: computeImpactScore(raw),
   };
+};
+
+const parseCricAPIStats = (statsArray) => {
+  if (!Array.isArray(statsArray)) return null;
+
+  const result = {
+    batting: {},
+    bowling: {},
+  };
+
+  // Prioritize T20s or IPL-like stats for the dashboard
+  const types = ['t20s', 't20i', 'ipl', 't20'];
+  
+  statsArray.forEach(s => {
+    if (!types.includes(s.matchtype?.toLowerCase())) return;
+    
+    const value = parseFloat(s.value) || 0;
+    const statKey = s.stat?.toLowerCase();
+
+    if (s.fn === 'batting') {
+      // Map CricAPI keys to UI expected keys
+      if (statKey === 'm') result.batting.matches = value;
+      if (statKey === 'inn') result.batting.innings = value;
+      if (statKey === 'runs') result.batting.runs = value;
+      if (statKey === 'hs') result.batting.hs = value;
+      if (statKey === 'avg') result.batting.avg = value;
+      if (statKey === 'sr') result.batting.sr = value;
+      if (statKey === '100') result.batting.hundreds = value;
+      if (statKey === '50') result.batting.fifties = value;
+      if (statKey === '4s') result.batting.fours = value;
+      if (statKey === '6s') result.batting.sixes = value;
+    } else if (s.fn === 'bowling') {
+      if (statKey === 'm') result.bowling.matches = value;
+      if (statKey === 'inn') result.bowling.innings = value;
+      if (statKey === 'o') result.bowling.overs = value;
+      if (statKey === 'wkts') result.bowling.wickets = value;
+      if (statKey === 'econ') result.bowling.economy = value;
+      if (statKey === 'avg') result.bowling.avg = value;
+    }
+  });
+
+  return result;
 };
 
 export const computeImpactScore = (player, situationMultiplier = 1) => {

@@ -5,6 +5,9 @@ import MatchCard from '../../components/MatchCard/MatchCard';
 import Scorecard from '../../components/Scorecard/Scorecard';
 import MomentumGraph from '../../components/MomentumGraph/MomentumGraph';
 import PhaseAnalysis from '../../components/PhaseAnalysis/PhaseAnalysis';
+import FanPulse from '../../components/FanPulse/FanPulse';
+import Atmosphere from '../../components/Atmosphere/Atmosphere';
+import MatchHeatmap from '../../components/MatchHeatmap/MatchHeatmap';
 
 const PlayerStats = lazy(() => import('../../components/PlayerStats/PlayerStats'));
 import {
@@ -372,7 +375,15 @@ const Home = () => {
               />
             </div>
           </div>
-
+          <div className="featured-grid" style={{ marginTop: 18 }}>
+             <Atmosphere scorecard={featuredScorecard} />
+             <MatchHeatmap scorecard={featuredScorecard} />
+          </div>
+          <FanPulse 
+            scorecard={featuredScorecard} 
+            team1={featuredMatch.teams?.[0] || featuredMatch.name?.split(' vs ')?.[0]}
+            team2={featuredMatch.teams?.[1] || featuredMatch.name?.split(' vs ')?.[1]}
+          />
           <div className="dashboard-card dashboard-card--full">
             <div className="dashboard-card__header">
               <div>

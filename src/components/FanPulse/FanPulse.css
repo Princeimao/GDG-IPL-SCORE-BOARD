@@ -1,0 +1,166 @@
+.fan-pulse-card {
+  background: linear-gradient(145deg, #10182b, #0a0f1d);
+  border: 1px solid rgba(245, 166, 35, 0.15);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.pulse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pulse-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #f5a623;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pulse-loading {
+  font-size: 11px;
+  color: #4a5578;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sec-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8892b0;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vote-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.vote-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.vote-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.vote-btn.active {
+  background: rgba(74, 158, 255, 0.1);
+  border-color: #4a9eff;
+  box-shadow: 0 0 15px rgba(74, 158, 255, 0.1);
+}
+
+.v-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e8eaf6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.v-perc {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a9eff;
+}
+
+.v-divider {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2a3550;
+}
+
+.prob-bar-row {
+  margin-bottom: 16px;
+}
+
+.prob-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4a5578;
+}
+
+.prob-wrapper {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+}
+
+.prob-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: white;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prob-fill.t1 { background: linear-gradient(90deg, #4a9eff, #3b82f6); }
+.prob-fill.t2 { background: linear-gradient(90deg, #f5a623, #d97706); }
+
+.ai-insight {
+  display: flex;
+  gap: 12px;
+  background: rgba(245, 166, 35, 0.04);
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(245, 166, 35, 0.2);
+}
+
+.insight-icon {
+  flex-shrink: 0;
+  color: #f5a623;
+  margin-top: 2px;
+}
+
+.ai-insight p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e8eaf6;
+  font-style: italic;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .fan-pulse-card {
+    padding: 16px;
+  }
+}

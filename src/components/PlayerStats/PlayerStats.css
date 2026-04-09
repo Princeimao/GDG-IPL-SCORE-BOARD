@@ -1,0 +1,399 @@
+.player-stats-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.player-stats-panel {
+  width: 420px;
+  max-width: 100vw;
+  height: 100vh;
+  background: #0f1628;
+  border-left: 1px solid rgba(74, 158, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+.ps-header {
+  position: relative;
+  padding: 24px 20px 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 2px solid var(--team-color, #4a9eff);
+}
+
+.ps-team-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.ps-header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-right: 36px;
+}
+
+.ps-player-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid var(--team-color, #4a9eff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.ps-player-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.ps-player-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #e8eaf6;
+  line-height: 1.1;
+}
+
+.ps-player-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ps-team {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ps-role, .ps-country {
+  font-size: 11px;
+  color: #4a5578;
+  background: rgba(255,255,255,0.05);
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.ps-style-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #4a5578;
+}
+
+.ps-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #8892b0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.ps-close:hover {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.3);
+  color: #ef4444;
+}
+
+/* Body */
+.ps-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 18px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Loading */
+.ps-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: #4a5578;
+  font-size: 13px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(74,158,255,0.1);
+  border-top-color: #4a9eff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Impact Score */
+.impact-meter {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.impact-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.impact-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8892b0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.impact-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+}
+
+.impact-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.impact-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.impact-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-score {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  width: 40px;
+  text-align: right;
+}
+
+.impact-formula {
+  font-size: 10px;
+  color: #4a5578;
+  font-style: italic;
+}
+
+/* Tabs */
+.ps-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.ps-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #4a5578;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.ps-tab.active {
+  background: rgba(74,158,255,0.15);
+  color: #4a9eff;
+}
+
+/* Stats */
+.ps-stats-section { display: flex; flex-direction: column; gap: 14px; }
+
+.ps-stats-block {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.ps-block-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a5578;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.ps-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.ps-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.ps-sv {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e8eaf6;
+}
+
+.ps-sv.gold { color: #f5a623; }
+
+.ps-sl {
+  font-size: 10px;
+  color: #4a5578;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Form chart */
+.form-chart {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.form-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a5578;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.ps-bar-chart {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+/* News */
+.ps-news-section { display: flex; flex-direction: column; gap: 10px; }
+
+.news-card {
+  display: block;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  background: rgba(74,158,255,0.05);
+  border-color: rgba(74,158,255,0.15);
+}
+
+.news-source {
+  font-size: 10px;
+  font-weight: 700;
+  color: #4a9eff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.news-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c8d0e8;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.news-desc {
+  font-size: 11px;
+  color: #4a5578;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.news-time {
+  font-size: 10px;
+  color: #4a5578;
+}
+
+.ps-no-news {
+  font-size: 13px;
+  color: #4a5578;
+  text-align: center;
+  padding: 40px 0;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .player-stats-panel { width: 100vw; }
+}

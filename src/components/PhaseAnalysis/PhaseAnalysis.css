@@ -1,0 +1,161 @@
+.phase-analysis {
+  padding: 20px;
+}
+
+.phase-analysis-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.phase-icon { color: #8b5cf6; }
+
+.phase-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e8eaf6;
+}
+
+.phase-sub {
+  font-size: 12px;
+  color: #4a5578;
+  margin-left: 4px;
+}
+
+.phase-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 680px) {
+  .phase-cards-row { grid-template-columns: 1fr; }
+}
+
+.phase-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--phase-color);
+  opacity: 0.6;
+}
+
+.phase-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.phase-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.phase-emoji {
+  font-size: 20px;
+}
+
+.phase-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--phase-color);
+}
+
+.phase-overs {
+  font-size: 11px;
+  color: #4a5578;
+}
+
+.phase-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #4a5578;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.phase-rr-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.phase-rr-label {
+  font-size: 10px;
+  color: #4a5578;
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.phase-rr-value {
+  font-size: 12px;
+  font-weight: 700;
+  width: 30px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Radar */
+.radar-section {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 16px;
+}
+
+.radar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8892b0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.radar-chart-wrap {
+  position: relative;
+}
+
+.radar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+}

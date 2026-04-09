@@ -1,0 +1,228 @@
+.scorecard-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Innings Header */
+.innings-header {
+  background: linear-gradient(135deg, rgba(20,28,46,1) 0%, rgba(26,36,64,0.8) 100%);
+  border: 1px solid rgba(var(--team-color, 74 158 255), 0.2);
+  border-radius: 14px 14px 0 0;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 2px;
+  border-bottom: 2px solid var(--team-color, #4a9eff);
+}
+
+.innings-team-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.innings-team-emoji {
+  font-size: 24px;
+}
+
+.innings-team-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #e8eaf6;
+}
+
+.innings-label {
+  font-size: 11px;
+  color: #4a5578;
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.innings-score-block {
+  text-align: right;
+}
+
+.innings-big-score {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.inning-runs {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #e8eaf6;
+}
+
+.inning-wk {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #8892b0;
+}
+
+.innings-detail {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.inning-overs, .inning-rr {
+  font-size: 12px;
+  color: #4a5578;
+}
+
+/* Crease Panel */
+.crease-panel {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(74,158,255,0.1);
+  border-top: none;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.crease-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a5578;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.crease-players {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.crease-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 130px;
+}
+
+.crease-player:hover {
+  background: rgba(74,158,255,0.08);
+  border-color: rgba(74,158,255,0.2);
+}
+
+.on-strike-player {
+  border-color: rgba(245,166,35,0.3);
+  background: rgba(245,166,35,0.06);
+}
+
+.crease-icon { font-size: 16px; }
+
+.crease-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.crease-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e8eaf6;
+}
+
+.crease-stat {
+  font-size: 11px;
+  color: #4a5578;
+}
+
+/* Scorecard Sections */
+.scorecard-section {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8892b0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.section-header svg { color: #4a9eff; }
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* Player Row */
+.player-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.player-row:hover td { background: rgba(74,158,255,0.06) !important; }
+
+.on-strike { background: rgba(245,166,35,0.05); }
+.bowling-active { background: rgba(74,158,255,0.05); }
+
+.player-name-cell {
+  max-width: 200px;
+}
+
+.player-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.player-name {
+  font-weight: 600;
+  color: #c8d0e8;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.player-dismissal {
+  display: block;
+  font-size: 10px;
+  color: #4a5578;
+  font-style: italic;
+  margin-top: 1px;
+}
+
+.strike-badge {
+  color: #f5a623;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bowling-badge {
+  font-size: 12px;
+}
+
+/* SR / Economy colour coding */
+.hot-sr { color: #f5a623 !important; font-weight: 700; }
+.warm-sr { color: #10b981 !important; }
+.good-econ { color: #10b981 !important; font-weight: 700; }
+.bad-econ { color: #ef4444 !important; }
+.highlight-wickets { color: #ef4444 !important; font-weight: 700; }
